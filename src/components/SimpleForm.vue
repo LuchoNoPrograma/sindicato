@@ -3,45 +3,39 @@
     <label for="nombre">Nombre:</label>
     <input type="text" name="persona.nombre" id="nombre">
     <input type="text" name="persona.ci" id="nombre">
-    <button type="submit">Registrar</button>
+    <ButtonPrimary :text-button="'Hola papus'"></ButtonPrimary>
   </form>
 </template>
 
 <script>
-export default{
-  data(){
-   return{
-     persona: {
-       nombre: '',
-       paterno: '',
-       materno: '',
-       ci: '',
-       email: '',
-       telefono: '',
-     }
-   }
-  },
-  async created(){
-    this.persona = fetch('/api/persona',{
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-    })
+import ButtonPrimary from "@/components/ui-elements/ButtonPrimary.vue";
+
+export default {
+  data() {
+    return {
+      persona: {
+        nombre: '',
+        paterno: '',
+        materno: '',
+        ci: '',
+        email: '',
+        telefono: '',
+      }
+    }
   },
   methods: {
-    async enviarFormulario(){
-      const response = await fetch('/api/persona', {
+    async enviarFormulario() {
+      await fetch('/api/persona', {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(this.persona)
       })
     }
+  },
+  components:{
+    ButtonPrimary
   }
 }
 </script>
 
-<style scoped>
-button{
-  padding: 2em;
-  background-color: #006666;
-  border-radius: 1em;
-}
+<style>
 </style>
